@@ -120,7 +120,7 @@ module Sequel
         db_opts = {}
         db_opts[:readonly] = typecast_value_boolean(opts[:readonly]) if opts.has_key?(:readonly)
         db = ::Extralite::Database.new(opts[:database].to_s)
-        db.busy_timeout(typecast_value_integer(opts.fetch(:timeout, 5000)))
+        db.busy_timeout = typecast_value_integer(opts.fetch(:timeout, 5000))
 
         connection_pragmas.each{|s| log_connection_yield(s, db){db.query(s)}}
 
